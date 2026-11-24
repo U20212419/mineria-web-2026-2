@@ -1,0 +1,2 @@
+id,tipo,pregunta,configuracion,respuesta,resultado,repetible,latencia_s
+1,propuesta,¿Qué clientes de Chile están insatisfechos con la entrega?,propuesto_sin_tool,Productos con reseñas de entrega negativas (≤ 2★) de clientes de Chile (4): Garmin Forerunner 265; HP Pavilion 15 Intel Core i5; OnePlus 12 256GB; Sennheiser Momentum 4.,incorrecta,,5.4

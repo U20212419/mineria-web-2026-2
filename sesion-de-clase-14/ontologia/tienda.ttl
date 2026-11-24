@@ -1,0 +1,128 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tv: <http://tienda.local/ontologia#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://tienda.local/ontologia> a owl:Ontology .
+
+tv:ProductoEnRiesgo a owl:Class ;
+    rdfs:comment "Producto con calificación < 3 y al menos una reseña de entrega negativa"@es ;
+    rdfs:subClassOf tv:Producto .
+
+tv:Testimonio a owl:Class ;
+    rdfs:label "Testimonio"@es ;
+    rdfs:comment "Comentario general sobre la tienda"@es ;
+    rdfs:subClassOf tv:Resena .
+
+tv:calificacion a owl:DatatypeProperty ;
+    rdfs:domain tv:Resena ;
+    rdfs:range xsd:integer .
+
+tv:calificacionPromedio a owl:DatatypeProperty ;
+    rdfs:domain tv:Producto ;
+    rdfs:range xsd:decimal .
+
+tv:ciudad a owl:DatatypeProperty ;
+    rdfs:domain tv:Cliente ;
+    rdfs:range xsd:string .
+
+tv:codigo a owl:DatatypeProperty ;
+    rdfs:domain tv:Producto ;
+    rdfs:range xsd:string .
+
+tv:contiene a owl:ObjectProperty ;
+    rdfs:domain tv:Orden ;
+    rdfs:range tv:Producto .
+
+tv:descripcion a owl:DatatypeProperty ;
+    rdfs:domain tv:Producto ;
+    rdfs:range xsd:string .
+
+tv:escritaPor a owl:ObjectProperty ;
+    rdfs:domain tv:Resena ;
+    rdfs:range tv:Cliente .
+
+tv:fecha a owl:DatatypeProperty ;
+    rdfs:range xsd:date .
+
+tv:nombre a owl:DatatypeProperty ;
+    rdfs:domain tv:Producto ;
+    rdfs:range xsd:string .
+
+tv:numero a owl:DatatypeProperty ;
+    rdfs:domain tv:Orden ;
+    rdfs:range xsd:string .
+
+tv:perteneceA a owl:ObjectProperty ;
+    rdfs:domain tv:Producto ;
+    rdfs:range tv:Subcategoria .
+
+tv:precio a owl:DatatypeProperty ;
+    rdfs:domain tv:Producto ;
+    rdfs:range xsd:decimal .
+
+tv:realizadaPor a owl:ObjectProperty ;
+    rdfs:domain tv:Orden ;
+    rdfs:range tv:Cliente .
+
+tv:resideEn a owl:ObjectProperty ;
+    rdfs:domain tv:Cliente ;
+    rdfs:range tv:Pais .
+
+tv:sobreOrden a owl:ObjectProperty ;
+    rdfs:domain tv:ResenaEntrega ;
+    rdfs:range tv:Orden .
+
+tv:sobreProducto a owl:ObjectProperty ;
+    rdfs:domain tv:ResenaEntrega ;
+    rdfs:range tv:Producto .
+
+tv:stock a owl:DatatypeProperty ;
+    rdfs:domain tv:Producto ;
+    rdfs:range xsd:integer .
+
+tv:subcategoriaDe a owl:ObjectProperty ;
+    rdfs:domain tv:Subcategoria ;
+    rdfs:range tv:Categoria .
+
+tv:texto a owl:DatatypeProperty ;
+    rdfs:domain tv:Resena ;
+    rdfs:range xsd:string .
+
+tv:total a owl:DatatypeProperty ;
+    rdfs:domain tv:Orden ;
+    rdfs:range xsd:decimal .
+
+tv:Categoria a owl:Class ;
+    rdfs:label "Categoria"@es ;
+    rdfs:comment "Categoría principal del catálogo (9 en total)"@es .
+
+tv:Pais a owl:Class ;
+    rdfs:label "Pais"@es ;
+    rdfs:comment "País de residencia del cliente"@es .
+
+tv:ResenaEntrega a owl:Class ;
+    rdfs:label "ResenaEntrega"@es ;
+    rdfs:comment "Reseña post-compra sobre la entrega de un producto"@es ;
+    rdfs:subClassOf tv:Resena .
+
+tv:Subcategoria a owl:Class ;
+    rdfs:label "Subcategoria"@es ;
+    rdfs:comment "Subdivisión de una categoría"@es .
+
+tv:Cliente a owl:Class ;
+    rdfs:label "Cliente"@es ;
+    rdfs:comment "Persona que compra en la tienda"@es .
+
+tv:Orden a owl:Class ;
+    rdfs:label "Orden"@es ;
+    rdfs:comment "Compra realizada por un cliente"@es .
+
+tv:Resena a owl:Class ;
+    rdfs:label "Resena"@es ;
+    rdfs:comment "Opinión escrita por un cliente"@es .
+
+tv:Producto a owl:Class ;
+    rdfs:label "Producto"@es ;
+    rdfs:comment "Artículo del catálogo de la tienda"@es .
+

@@ -1,0 +1,19 @@
+# Python 3.11
+pandas
+numpy
+requests
+matplotlib
+torch
+transformers
+accelerate
+sentence-transformers
+chromadb
+rdflib
+pyshacl
+mcp
+pydantic
+jsonschema
+nest_asyncio
+notebook
+nbconvert
+ipykernel

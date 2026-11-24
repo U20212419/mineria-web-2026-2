@@ -1,0 +1,11 @@
+id,tipo,LLM solo,RAG (Ej. 1),RAG determinista (Ej. 2),MCP + tool-calling ingenuo,MCP + tool-calling robusto
+1,descriptiva,✘,✔,✔,✔,✔
+2,filtro,~,~,✔,✔,✔
+3,conteo,✘,✘,✔,✘,✔
+4,agregacion,✘,✘,✔,✘,✔
+5,ranking,~,✘,✔,✘,✔
+6,opinion,✘,✘,✘,✘,~
+7,puntual,✘,✔,✔,✘,✔
+8,relacional,✘,~,✔,~,✔
+9,ranking,✘,✘,✔,✘,✔
+10,en_vivo,✘,✔,✔,✔,✔

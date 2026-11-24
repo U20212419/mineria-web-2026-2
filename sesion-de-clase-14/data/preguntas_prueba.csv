@@ -1,0 +1,11 @@
+id,tipo,pregunta,esperado,respuesta_referencia,enfoque_ideal
+1,descriptiva,¿Qué audífonos con cancelación de ruido vende la tienda?,WH-1000XM5|QuietComfort,"Sony WH-1000XM5, Bose QuietComfort Ultra, AirPods Pro 2, Galaxy Buds2 Pro y Sennheiser Momentum 4",RAG
+2,filtro,¿Qué smartwatches cuestan menos de 1000 soles?,Amazfit|Huawei,"Amazfit GTS 4 Mini (S/ 449) y Huawei Watch GT 4 (S/ 999)",RAG con filtros / determinista
+3,conteo,¿Cuántos productos tienen stock menor a 5 unidades?,DJI Air 3|Family Hub,"2 productos: DJI Air 3 (4) y Samsung Family Hub (3)",determinista
+4,agregacion,¿Cuál es la calificación promedio de los productos de la categoría Audio?,3.44,"3.44 (promedio de 10 productos)",determinista
+5,ranking,¿Qué país tiene el mayor monto total de ventas?,Peru|2011695,"Perú, con S/ 2 011 695.86",determinista
+6,opinion,¿De qué se quejan los clientes en las reseñas de entrega?,retraso|usado,"Retrasos en la entrega, productos que llegan usados o dañados y accesorios faltantes",RAG
+7,puntual,¿Cuál es el precio del Nintendo Switch OLED?,1599,"S/ 1599",determinista
+8,relacional,¿Qué productos recibieron reseñas de entrega negativas de clientes de Chile?,Sennheiser|Forerunner|OnePlus|Pavilion,"Sennheiser Momentum 4, Garmin Forerunner 265, OnePlus 12 y HP Pavilion 15",ontologia
+9,ranking,¿Cuál es el producto mejor calificado de la categoría Fotografia y Video?,Insta360,"Insta360 X4 (5.0)",determinista
+10,en_vivo,¿Cuánto stock queda ahora del DJI Air 3?,4,"Depende de la tienda en este momento (4 en los datos scrapeados)",MCP (API en vivo)

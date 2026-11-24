@@ -1,0 +1,140 @@
+[
+  {
+    "nombre": "precio_producto",
+    "parametros": [
+      "producto"
+    ],
+    "ejemplos": [
+      "¿Cuál es el precio del iPhone 15?",
+      "¿Cuánto cuesta la PlayStation 5?",
+      "precio de un producto",
+      "¿Cuál es el precio de la laptop HP Omen?",
+      "¿A cuánto está el Garmin Fenix 7?"
+    ],
+    "sparql": "SELECT ?nombre ?precio WHERE { ?p tv:nombre ?producto ; tv:nombre ?nombre ; tv:precio ?precio }",
+    "encabezado": "El precio de {nombre} es S/ {precio:,.2f}.",
+    "fila": null
+  },
+  {
+    "nombre": "stock_producto",
+    "parametros": [
+      "producto"
+    ],
+    "ejemplos": [
+      "¿Cuánto stock queda del Galaxy S24?",
+      "¿Cuántas unidades hay disponibles de la GoPro?",
+      "stock de un producto",
+      "¿Cuánto stock hay ahora de la Nikon Z50?",
+      "¿Quedan unidades del Kindle?"
+    ],
+    "sparql": "SELECT ?nombre ?stock WHERE { ?p tv:nombre ?producto ; tv:nombre ?nombre ; tv:stock ?stock }",
+    "encabezado": "Según los datos scrapeados, {nombre} tiene {stock} unidades en stock.",
+    "fila": null
+  },
+  {
+    "nombre": "stock_bajo",
+    "parametros": [
+      "umbral"
+    ],
+    "ejemplos": [
+      "¿Cuántos productos tienen stock menor a 10?",
+      "productos con poco stock",
+      "¿qué productos están por agotarse?"
+    ],
+    "sparql": "SELECT ?nombre ?stock WHERE { ?p a tv:Producto ; tv:nombre ?nombre ; tv:stock ?stock . FILTER(?stock < ?umbral) } ORDER BY ?stock",
+    "encabezado": "Productos con stock menor a {umbral} unidades: {n}.",
+    "fila": "{nombre} ({stock})"
+  },
+  {
+    "nombre": "promedio_categoria",
+    "parametros": [
+      "categoria"
+    ],
+    "ejemplos": [
+      "¿Cuál es la calificación promedio de la categoría Laptops?",
+      "rating medio de los productos de Audio"
+    ],
+    "sparql": "SELECT (AVG(?c) AS ?promedio) (COUNT(?p) AS ?total) WHERE { ?p tv:calificacionPromedio ?c ; tv:perteneceA/tv:subcategoriaDe/rdfs:label ?categoria }",
+    "encabezado": "La calificación promedio de la categoría {categoria} es {promedio:.2f} ({total} productos).",
+    "fila": null
+  },
+  {
+    "nombre": "mejor_producto_categoria",
+    "parametros": [
+      "categoria"
+    ],
+    "ejemplos": [
+      "¿Cuál es el producto mejor calificado de Gaming?",
+      "el producto con mejor rating de la categoría Audio"
+    ],
+    "sparql": "SELECT ?nombre ?calificacion WHERE { ?p tv:nombre ?nombre ; tv:calificacionPromedio ?calificacion ; tv:perteneceA/tv:subcategoriaDe/rdfs:label ?categoria } ORDER BY DESC(?calificacion) LIMIT 3",
+    "encabezado": "El producto mejor calificado de {categoria} es {nombre} ({calificacion}★). Top 3:",
+    "fila": "{nombre} ({calificacion}★)"
+  },
+  {
+    "nombre": "ventas_por_pais",
+    "parametros": [],
+    "ejemplos": [
+      "¿Qué país tiene más ventas?",
+      "monto total de ventas por país",
+      "¿dónde se vende más?"
+    ],
+    "sparql": "SELECT ?pais (SUM(?t) AS ?ventas) WHERE { ?o a tv:Orden ; tv:total ?t ; tv:realizadaPor/tv:resideEn/rdfs:label ?pais } GROUP BY ?pais ORDER BY DESC(?ventas)",
+    "encabezado": "El país con el mayor monto de ventas es {pais}, con S/ {ventas:,.2f}. Ranking:",
+    "fila": "{pais}: S/ {ventas:,.2f}"
+  },
+  {
+    "nombre": "productos_subcategoria_precio_max",
+    "parametros": [
+      "subcategoria",
+      "precio_max"
+    ],
+    "ejemplos": [
+      "¿Qué laptops gaming cuestan menos de 8000?",
+      "drones por debajo de 5000 soles",
+      "smartwatches baratos de menos de 500"
+    ],
+    "sparql": "SELECT ?nombre ?precio WHERE { ?p tv:nombre ?nombre ; tv:precio ?precio ; tv:perteneceA/rdfs:label ?subcategoria . FILTER(?precio < ?precio_max) } ORDER BY ?precio",
+    "encabezado": "Productos de {subcategoria} con precio menor a S/ {precio_max}: {n}.",
+    "fila": "{nombre} (S/ {precio:,.0f})"
+  },
+  {
+    "nombre": "resenas_negativas_pais",
+    "parametros": [
+      "pais"
+    ],
+    "ejemplos": [
+      "¿Qué productos tuvieron malas reseñas de entrega en Perú?",
+      "reseñas negativas de clientes de Argentina"
+    ],
+    "sparql": "SELECT DISTINCT ?nombre WHERE { ?r a tv:ResenaEntrega ; tv:calificacion ?c ; tv:sobreProducto/tv:nombre ?nombre ; tv:escritaPor/tv:resideEn/rdfs:label ?pais . FILTER(?c <= 2) } ORDER BY ?nombre",
+    "encabezado": "Productos con reseñas de entrega negativas (≤ 2★) de clientes de {pais} ({n}):",
+    "fila": "{nombre}"
+  },
+  {
+    "nombre": "productos_en_riesgo",
+    "parametros": [],
+    "ejemplos": [
+      "¿Qué productos están en riesgo?",
+      "lista de productos en riesgo por baja calificación"
+    ],
+    "sparql": "SELECT ?nombre ?calificacion WHERE { ?p a tv:ProductoEnRiesgo ; tv:nombre ?nombre ; tv:calificacionPromedio ?calificacion } ORDER BY ?calificacion",
+    "encabezado": "Productos en riesgo (calificación < 3 y reseñas de entrega negativas): {n}.",
+    "fila": "{nombre} ({calificacion}★)"
+  },
+  {
+    "nombre": "pregunta_abierta",
+    "parametros": [],
+    "sparql": null,
+    "encabezado": null,
+    "fila": null,
+    "ejemplos": [
+      "¿De qué se quejan los clientes?",
+      "¿Qué opinan los clientes de la entrega?",
+      "¿Qué me recomiendas para viajar?",
+      "¿Qué problemas mencionan las reseñas?",
+      "¿Qué productos sirven para hacer ejercicio?",
+      "¿Cómo es la experiencia de compra?"
+    ]
+  }
+]
